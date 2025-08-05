@@ -10,7 +10,14 @@ function PasswordOptions() {
           <span>0</span>
         </div>
         <form>
-          <input type="range" name="passwordLenght" id="iPasswordLenght" />
+          <input
+            type="range"
+            min={0}
+            max={20}
+            name="passwordLenght"
+            id="iPasswordLenght"
+            className="password-range-lenght"
+          />
         </form>
       </div>
 
@@ -24,14 +31,14 @@ function PasswordOptions() {
       <div className="password-strength">
         <h2>STRENGTH</h2>
         <div className="strength-indicator">
-          <h1>TESTE</h1>
-          <span>imagem</span>
+          <h1>teste</h1>
+          <span className="strength-bar">barra de força</span>
         </div>
       </div>
 
       <div className="generate-button">
-        <button type="submit">GENERATE</button>
-        <img src="src\assets\icon-check.svg" alt="" />
+        <button>GENERATE</button>
+        <img src="src\assets\icon-arrow-right.svg" alt="" />
       </div>
     </div>
   );

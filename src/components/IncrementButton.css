@@ -1,6 +1,20 @@
 .increment-button {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
+}
+
+.increment-button:hover .square {
+  border-color: var(--green);
+  cursor: pointer;
+}
+
+.increment-button:hover p {
+  cursor: pointer;
+}
+
+.increment-button p {
+  font-size: 1.2rem;
 }
 
 .square {

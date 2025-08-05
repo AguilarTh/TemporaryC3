@@ -6,7 +6,7 @@ import IncrementButton from "./components/IncrementButton";
 function App() {
   return (
     <div className="container">
-      <h1>Password Generator</h1>
+      <h1 className="tittle">Password Generator</h1>
       <PasswordDisplay />
       <PasswordOptions />
     </div>
