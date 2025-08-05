@@ -1,0 +1,10 @@
+.increment-button {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.square {
+  width: 17px;
+  height: 17px;
+  border: 2px solid var(--g200);
+}
