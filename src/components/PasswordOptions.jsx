@@ -1,6 +1,6 @@
 import "./PasswordOptions.css";
-import IncrementButton from "./IncrementButton.jsx";
 import { useEffect, useState } from "react";
+import StrengthIndicator from "./StrengthIndicator";
 
 function PasswordOptions() {
   // --- DEFINIÇÃO DE useStates
@@ -52,7 +52,8 @@ function PasswordOptions() {
             min={0}
             max={20}
             value={passwordLenght}
-            // REFERENCIA DA FUNÇÃO = Log de evento + complexa // ARROW FUNCTION INLINE = Log de evento simples + curta
+            // REFERENCIA DA FUNÇÃO = Log de evento + complexa
+            // ARROW FUNCTION INLINE = Log de evento simples + curta
             // exemp: onChange = setPasswordLenght
             onChange={onRangeBarChange}
             style={{ background: rangeBarBg }}
@@ -64,19 +65,49 @@ function PasswordOptions() {
       </div>
 
       <div className="password-increment-options">
-        <IncrementButton incrementElement="Uppercase Letters" />
-        <IncrementButton incrementElement="Lowercase Letters" />
-        <IncrementButton incrementElement="Numbers" />
-        <IncrementButton incrementElement="Symbols" />
-      </div>
+        <div className="checkbox-container">
+          <input
+            type="checkbox"
+            name="uppercaseButton"
+            id="iUppercaseButton"
+            className="increment-button"
+          />
+          <label htmlFor="iUppercaseButton">Include Uppercase Letters</label>
+        </div>
 
-      <div className="password-strength">
-        <h2>STRENGTH</h2>
-        <div className="strength-indicator">
-          <h1>teste</h1>
-          <span className="strength-bar">barra de força</span>
+        <div className="checkbox-container">
+          <input
+            type="checkbox"
+            name="lowercaseButton"
+            id="iLowercaseButton"
+            className="increment-button"
+          />
+          <label htmlFor="iLowercaseButton">Include Lowercase Letters</label>
+        </div>
+
+        <div className="checkbox-container">
+          <input
+            type="checkbox"
+            name="numbersButton"
+            id="iNumbersButton"
+            className="increment-button"
+          />
+          <label htmlFor="iNumbersButton">Include Numbers</label>
+        </div>
+
+        <div className="checkbox-container">
+          <input
+            type="checkbox"
+            name="symbolsButton"
+            id="iSymbolsButton"
+            className="increment-button"
+          />
+          <label htmlFor="iSymbolsButton">Include Symbols</label>
         </div>
       </div>
+
+      {/* substituir dps para receber a variavel corretamente */}
+      <StrengthIndicator passwordStrength={1} />
 
       <div className="generate-button">
         <button>GENERATE</button>
