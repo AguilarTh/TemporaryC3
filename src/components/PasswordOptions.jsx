@@ -1,12 +1,14 @@
 import "./PasswordOptions.css";
 import { useEffect, useState } from "react";
 import StrengthIndicator from "./StrengthIndicator";
+import { generatePassword, evaluateStrength } from "./PasswordFunctions";
 
-function PasswordOptions() {
+function PasswordOptions({ setPassword }) {
   // --- DEFINIÇÃO DE useStates
 
-  const [passwordLenght, setPasswordLenght] = useState(10);
+  const [passwordLenght, setPasswordLenght] = useState(0);
   const [rangeBarBg, setRangeBarBg] = useState("");
+  const [strength, setStrength] = useState("default"); // força em texto agora
 
   // FUNÇÃO GLOBAL para o "rangeBar" => ( cada elemento so pode receber 1 função Onclick)
   const onRangeBarChange = (e) => {
@@ -35,9 +37,49 @@ function PasswordOptions() {
     // criação de um evento falso para passar inicialmente a função de mudança do rangeBar
     const fakeEvent = { target: { value: passwordLenght, min: 0, max: 20 } };
     onRangeBarChange(fakeEvent);
-  }),
-    // esse segundo argumento é responsavel pela "lista de gatilhos" para executar novamente o useEffect, como so precisa inicialmente,  utiliza-se a string vazia
-    [];
+  }, []);
+
+  // Função que lê os checkbox e gera senha, atualiza força e envia senha para o pai (App)
+  const handleGenerateClick = () => {
+    const options = {
+      length: Number(passwordLenght),
+      includeUppercase: document.getElementById("iUppercaseButton").checked,
+      includeLowercase: document.getElementById("iLowercaseButton").checked,
+      includeNumbers: document.getElementById("iNumbersButton").checked,
+      includeSymbols: document.getElementById("iSymbolsButton").checked,
+    };
+
+    // Gera a senha com as opções
+    const newPassword = generatePassword(options);
+
+    // Atualiza a senha no App (pai)
+    setPassword(newPassword);
+
+    // Avalia força da senha e atualiza local
+    const strengthResult = evaluateStrength(newPassword, options); // retorno tipo string
+
+    // Conversão para um valor padrão reconhecido pelo StrengthIndicator
+    const normalizedStrength = (() => {
+      switch (strengthResult.toLowerCase()) {
+        case "vulnerável":
+        case "vulnerable":
+          return "vulnerable";
+        case "fraca":
+        case "weak":
+          return "weak";
+        case "média":
+        case "medium":
+          return "medium";
+        case "forte":
+        case "strong":
+          return "strong";
+        default:
+          return "default";
+      }
+    })();
+
+    setStrength(normalizedStrength);
+  };
 
   return (
     <div className="password-options">
@@ -106,12 +148,18 @@ function PasswordOptions() {
         </div>
       </div>
 
-      {/* substituir dps para receber a variavel corretamente */}
-      <StrengthIndicator passwordStrength={1} />
+      {/* componente que mostra visualmente a força da senha */}
+      <StrengthIndicator passwordStrength={strength} />
 
-      <div className="generate-button">
-        <button>GENERATE</button>
-        <img src="src\assets\icon-arrow-right.svg" alt="" />
+      {/* *Coloquei o botão de gerar a senha na DIV para q o botão funcione em todo a extensão dele */}
+      <div className="generate-button" onClick={handleGenerateClick}>
+        <button type="button">GENERATE</button>
+        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill="currentColor"
+            d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"
+          />
+        </svg>
       </div>
     </div>
   );

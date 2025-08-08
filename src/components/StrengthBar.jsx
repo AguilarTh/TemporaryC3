@@ -6,7 +6,7 @@ import "./StrengthBar.css";
 
 function StrengthBar({ isActive, color }) {
   const style = {
-    backgroundColor: isActive ? color : "transparente",
+    backgroundColor: isActive ? color : "transparent",
     borderColor: isActive ? color : "hsl(252, 11%, 91%)",
   };
 
