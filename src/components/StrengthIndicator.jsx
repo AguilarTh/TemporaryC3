@@ -37,7 +37,7 @@ function StrengthIndicator({ passwordStrength }) {
 
   return (
     <div className="strength-indicator-container">
-      <span>STRENGTH</span>
+      <span className="strength-word">STRENGTH</span>
       <div className="indicator-bar-container">
         {/* a propriedade "style" serve para aplicar estilo CSS inline no JSX, ela recebe como param um objeto JS, se essa mudança de estilo for curta da para colocar já direto na linha usando style={{...}}, se não, faz um obj JS separado e depois passa para essa prop */}
         <span className="current-strength-text" style={strengthTextStyle}>

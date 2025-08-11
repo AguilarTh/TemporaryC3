@@ -15,9 +15,17 @@ function PasswordDisplay({ password }) {
 
   const [isCopied, setIsCopied] = useState(false);
 
-  // assync =
+  // assync/await = tornam essa função Assíncrona -> os dois são uma interdependentes AWAIT EXIGE ASYNC
+  // Analogia: ASSYNC = Garçom Especial -> permite o uso do AWAIT que diz a esse "garçom" para ir pegar o pedido e ESPERAR o prato ficar pronto, entretando o resto do restaurante (no caso o site, não para)
+  // Resumo: Basicamene Assync/Await juntos servem para lidar com operações que podem demorar ( copiar para a area de transferencia, fazer uma chamada de rede, etc) sem travar a exp do usuario
+
   const handleCopy = async () => {
     if (!password) return;
+
+    // LINHA MESTRA
+    // NAVIGATOR: Obj Global do Navegador = da acesso a várias funcionalidade ( geoloc, camera, area de transf ...)
+    // CLIPBOARD: API especifica para o "Copiar e Colar"
+    // WriteText: Diz, basicamente, "escreva o conteúdo da var na area de transferencia" // essa operação não é instantanea
 
     await navigator.clipboard.writeText(password);
     setIsCopied(true);

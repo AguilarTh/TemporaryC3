@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.strength-indicator-container span {
+.strength-word {
   color: var(--g400);
   font-weight: 600;
   font-size: 1.5rem;
@@ -20,7 +20,8 @@
 
 .current-strength-text {
   color: hsl(252, 11%, 91%);
-  font-size: 2rem !important;
+  font-weight: 600;
+  font-size: 2rem;
   letter-spacing: 0.05rem;
   margin-right: 0.5rem;
 }
@@ -28,4 +29,20 @@
 .indicator-bars {
   display: flex;
   gap: 0.5rem;
+}
+
+@media (max-width: 425px) {
+  .strength-indicator-container {
+    padding: 2rem 1.5rem;
+  }
+  .strength-word {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+  .indicator-bar-container {
+    gap: 0rem;
+  }
+  .current-strength-text {
+    font-size: 1rem;
+  }
 }
